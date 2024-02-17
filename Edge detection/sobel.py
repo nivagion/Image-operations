@@ -4,7 +4,7 @@ import cv2
 def operation(image):
     kernel_x = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
     kernel_y = np.array([[-1, -2, -1], [0, 0, 0], [1, 2, 1]])
-    
+
     sobelX = np.zeros_like(image)
     sobelY = np.zeros_like(image)
     
@@ -15,25 +15,16 @@ def operation(image):
             sobelY[y, x] = np.sum(area * kernel_y)
             
     #combine x and y kernel     
-    combinedXY = np.zeros_like(image)
-    for y in range(image.shape[0]):
-        for x in range(image.shape[1]):
-            combinedXY[y, x] = np.sqrt(sobelX[y, x]**2 + sobelY[y, x]**2)
-            #combinedXY[y, x] = sobelY[y, x]
-    #find max value
-    max_value = combinedXY[0, 0]
-    for y in range(combinedXY.shape[0]):
-        for x in range(combinedXY.shape[1]):
-            if combinedXY[y, x] > max_value:
-                max_value = combinedXY[y, x]
-                
-    #use max value to normalize between 0-255
-    for y in range(combinedXY.shape[0]):
-        for x in range(combinedXY.shape[1]):
-            combinedXY[y, x] = (combinedXY[y, x] / max_value) * 255
+    combinedXY = np.hypot(sobelX, sobelY)
             
-    threshold = 128
-    combinedXY[combinedXY < threshold] = 0
-    combinedXY[combinedXY >= threshold] = 255
+    #find max value
+    max_value = np.max(combinedXY)
+                
+    #normalize between 0-255
+    combinedXY = (combinedXY / max_value) * 255
+            
+    #threshold = 128
+    #combinedXY[combinedXY < threshold] = 0
+    #combinedXY[combinedXY >= threshold] = 255
     
-    return combinedXY.astype(np.uint8) #8 bit integer
+    return combinedXY 

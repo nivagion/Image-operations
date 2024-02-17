@@ -1,4 +1,4 @@
-import numpy as np #TODO: faster sobel, it also  looks bit weird, need to look into it
+import numpy as np
 import cv2
 
 import sobel
@@ -14,7 +14,7 @@ if whatToDo == 'so':
     #save it
     cv2.imwrite('output/output.jpg', sobel_image)
     #display it
-    cv2.imshow('grayscale', sobel_image)
+    cv2.imshow('sobel', sobel_image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
