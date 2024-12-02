@@ -6,7 +6,7 @@ import grayscale
 
 whatToDo = input("single char: sobel-so  greyscale-gs : ")
 
-image = cv2.imread('input/bigcat.jpg')
+image = cv2.imread('input/Happi.png')
 
 if whatToDo == 'so':
     grayscale_image = grayscale.operation(image)
@@ -14,7 +14,7 @@ if whatToDo == 'so':
     #save it
     cv2.imwrite('output/output.jpg', sobel_image)
     #display it
-    cv2.imshow('sobel', sobel_image)
+    #cv2.imshow('sobel', sobel_image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -23,7 +23,7 @@ elif whatToDo == 'gs':
     #save it
     cv2.imwrite('output/output.jpg', grayscale_image)
     #display it
-    cv2.imshow('grayscale', grayscale_image)
+    #cv2.imshow('grayscale', grayscale_image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
